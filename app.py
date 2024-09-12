@@ -5,10 +5,18 @@ import PyPDF2
 import tempfile
 import os
 from google.api_core import exceptions
+from dotenv import load_dotenv
 import time
 
+load_dotenv()
+
 # Configure the Gemini AI model
-genai.configure(api_key='GEMINI_API_KEY')
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    st.error("Gemini API key not found. Please set the GEMINI_API_KEY environment variable.")
+    st.stop()
+
+genai.configure(api_key=api_key)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 MAX_RETRIES = 3
@@ -57,7 +65,7 @@ def extract_text_from_pdf(pdf_file):
     return text
 
 def main():
-    st.title("AI-driven Medical Report Analyzer (Gemini 1.5 Flash)")
+    st.title("AI-driven Medical Report Analyzer")
     st.write("Upload a medical report (image or PDF) for analysis")
 
     file_type = st.radio("Select file type:", ("Image", "PDF"))
