@@ -1,4 +1,3 @@
-# 'AIzaSyCJwtLRhc2ttGXfIZK5Ggn5EQeaw4SE8a4'
 import streamlit as st
 import google.generativeai as genai
 from PIL import Image
@@ -9,7 +8,7 @@ from google.api_core import exceptions
 import time
 
 # Configure the Gemini AI model
-genai.configure(api_key='GEMINI_AI_API')
+genai.configure(api_key='GEMINI_API_KEY')
 model = genai.GenerativeModel('gemini-1.5-flash')
 
 MAX_RETRIES = 3
