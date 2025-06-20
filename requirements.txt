@@ -40,7 +40,7 @@ pytesseract>=0.3.10
 easyocr>=1.7.0
 
 # Windows-specific packages
-pywin32>=306  # Windows API access
+pywin32>=310  # Windows API access
 
 # HTTP requests (for API calls)
 requests>=2.31.0
