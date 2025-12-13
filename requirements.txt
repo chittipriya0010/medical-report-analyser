@@ -44,7 +44,7 @@ pywin32>=310; platform_system == "Windows"  # Windows API access
 
 # HTTP requests (for API calls)
 requests>=2.31.0
-urllib3>=2.0.0
+urllib3>=2.6.0
 
 # JSON handling
 jsonschema>=4.17.0
@@ -62,3 +62,4 @@ pytest>=7.4.0
 black>=23.0.0
 flake8>=6.0.0
 mypy>=1.5.0
+fonttools>=4.61.0 # not directly required, pinned by Snyk to avoid a vulnerability
