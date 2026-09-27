@@ -1,0 +1,49 @@
+# Environment and Sensitive Secrets (NEVER COMMIT TO GITHUB)
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+.streamlit/secrets.toml
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE & Editor Configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# Streamlit Local Cache & Runtime Logs
+.streamlit/cache/
+*.log
+
+# Generated Exports & Temporary Test Files
+scratch/
+temp/
+*.pdf
+*.docx
+!assets/**/*.pdf
+!assets/**/*.docx
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini

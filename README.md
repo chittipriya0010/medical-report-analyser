@@ -1,0 +1,117 @@
+# 🏥 Clinical Diagnostic Intelligence Portal (v2.2)
+
+An enterprise-grade AI medical laboratory report scanner and clinical decision-support portal built with **Google Gemini Multimodal Vision**, **Streamlit**, and **Clinical Shadcn UI** aesthetics.
+
+---
+
+## 🌟 Key Features
+
+- **🚀 Multimodal Document Vision**:
+  - Solves the `"Could not extract sufficient text from the file"` error.
+  - Ingests scanned documents, camera photos (JPG, PNG, TIFF), and multi-page digital PDFs via high-DPI `PyMuPDF` rendering.
+- **🎨 Dark Clinical Design**:
+  - High-contrast clinical dark theme (`#0b0f17` background, `#111827` cards, `#f8fafc` text).
+  - No decorative emojis, clean borders, responsive metric badges.
+- **🏷️ Transparent Status Attribution**:
+  - `[Mentioned in Report]`: Biomarkers explicitly flagged on the laboratory document.
+  - `[AI Assumption]`: Mathematically derived by comparing observed levels against reference intervals.
+- **🎯 Clinical Risk Stratification**:
+  - High-contrast Cardiovascular Risk, Metabolic Risk, and Overall Health Index charts.
+  - Actionable recommendations categorized into Lifestyle, Dietary, Medical, and Follow-up.
+- **📥 Clinical Document Export Center**:
+  - **Clinical PDF Report (`.pdf`)**: Formatted pathology report with tables and risk indices.
+  - **Microsoft Word Document (`.docx`)**: Editable report for physician EHR notes.
+  - **Structured Health Data (`.json`)**: Machine-readable JSON enriched with attribution metadata and AI screening notices.
+  - **Diagnostic Summary Notes (`.md`)**: Clean markdown summary.
+- **⚠️ Prominent AI Clinical Notices**:
+  - Embedded in all exports and UI to mandate expert physician consultation before clinical action.
+
+---
+
+## 📁 Project Architecture
+
+```
+medical-report-analyser/
+├── .streamlit/
+│   └── config.toml             # Dark theme & server configuration
+├── .env.example                # Safe environment variable template (no secrets)
+├── .env.local                  # Local API keys (auto-ignored by git)
+├── .gitignore                  # Gitignore protecting keys, cache, and virtualenvs
+├── requirements.txt            # Python dependencies (ready for Streamlit Cloud)
+├── README.md                   # Documentation
+├── app.py                      # Main Streamlit application entrypoint
+│
+└── src/                        # Modular Core Architecture
+    ├── config.py               # Env & Streamlit secrets loader, Gemini models, reference intervals
+    ├── core/
+    │   ├── extractor.py        # Hybrid Document Extractor (Digital PDF + PyMuPDF Vision)
+    │   ├── gemini_client.py    # google-genai v2.25+ Multimodal Gemini client
+    │   └── analyzer.py         # Range evaluation, status attribution, markdown generator
+    ├── models/
+    │   └── schemas.py          # Pydantic schemas (MedicalReportData, TestItem, etc.)
+    ├── ui/
+    │   ├── components.py       # High-contrast metric cards, banners, sidebar
+    │   └── visualizer.py       # Plotly charts, panel breakdown, 4-button export hub
+    └── utils/
+        ├── exporter.py         # ReportLab PDF & python-docx Word generators
+        ├── helpers.py          # Value formatting and numeric cleaners
+        └── sample_data.py      # Built-in sample lab panel for instant testing
+```
+
+---
+
+## 🚀 Local Quick Start
+
+### 1. Prerequisites
+- Python 3.10+
+- Google Gemini API Key ([Get one free from Google AI Studio](https://aistudio.google.com/))
+
+### 2. Environment Setup
+Create a `.env.local` file in the root directory:
+```env
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+DEFAULT_GEMINI_MODEL=gemini-3.5-flash-lite
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run Locally
+```bash
+streamlit run app.py
+```
+*(If `streamlit` is not recognized globally on Windows, run `python -m streamlit run app.py`)*
+
+---
+
+## ☁️ Deploying to Streamlit Community Cloud
+
+You can deploy this application directly to [Streamlit Community Cloud](https://share.streamlit.io/):
+
+1. **Push to GitHub**:
+   - Ensure your repository is pushed to GitHub.
+   - The `.gitignore` file automatically prevents `.env.local` and your real API keys from being committed.
+
+2. **Deploy on Streamlit Cloud**:
+   - Go to [share.streamlit.io](https://share.streamlit.io/) and log in with your GitHub account.
+   - Click **"New app"**.
+   - Select your repository, branch (`main`), and set **Main file path** to `app.py`.
+
+3. **Configure Secrets (Crucial)**:
+   - Click **"Advanced settings..."** before deploying (or go to **Settings > Secrets** on the deployed app).
+   - In the **Secrets** editor, paste:
+     ```toml
+     GEMINI_API_KEY = "your_actual_gemini_api_key_here"
+     ```
+   - Click **Save**.
+
+4. **Launch**:
+   - Click **"Deploy!"**. Streamlit Cloud will install packages from `requirements.txt` and launch your portal.
+
+---
+
+## ⚠️ Medical & Legal Disclaimer
+
+This software contains automated clinical analysis generated by Artificial Intelligence (AI). All findings, biomarker evaluations, and risk stratifications are intended strictly for educational, research, and diagnostic screening purposes. This tool does **NOT** substitute for professional medical diagnosis, laboratory testing, or clinical pathology judgment. **Always consult a certified medical practitioner or pathologist before taking clinical action or altering medical treatment.**
