@@ -8,7 +8,7 @@ streamlit>=1.30.0
 streamlit-shadcn-ui>=0.1.11
 
 # Multimodal Document & Vision Extraction
-Pillow>=10.0.0
+Pillow>=10.2.0
 PyMuPDF>=1.24.0
 pdfplumber>=0.9.0
 PyPDF2>=3.0.0
@@ -29,3 +29,5 @@ plotly>=5.15.0
 # Configuration & Network
 python-dotenv>=1.0.0
 requests>=2.31.0
+protobuf>=4.25.8 # not directly required, pinned by Snyk to avoid a vulnerability
+pyarrow>=14.0.1 # not directly required, pinned by Snyk to avoid a vulnerability
